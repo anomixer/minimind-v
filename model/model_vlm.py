@@ -38,7 +38,7 @@ class VisionProj(nn.Module):
         return vision_proj
 
 
-# 继承自语言模型
+# 繼承自語言模型
 class MiniMindVLM(MiniMindForCausalLM):
     config_class = VLMConfig
 
@@ -57,7 +57,7 @@ class MiniMindVLM(MiniMindForCausalLM):
             return None, None
         model = CLIPModel.from_pretrained(model_path)
         processor = CLIPProcessor.from_pretrained(model_path)
-        # 冻结 vision_encoder 的所有参数
+        # 凍結 vision_encoder 的所有引數
         for param in model.parameters():
             param.requires_grad = False
         return model.eval(), processor

@@ -18,20 +18,20 @@ def convert_torch2transformers_minimind(torch_path, transformers_path, dtype=tor
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     state_dict = torch.load(torch_path, map_location=device)
     lm_model.load_state_dict(state_dict, strict=False)
-    lm_model = lm_model.to(dtype)  # 转换模型权重精度
+    lm_model = lm_model.to(dtype)  # 轉換模型權重精度
     model_params = sum(p.numel() for p in lm_model.parameters() if p.requires_grad)
-    print(f'模型参数: {model_params / 1e6} 百万 = {model_params / 1e9} B (Billion)')
+    print(f'模型引數: {model_params / 1e6} 百萬 = {model_params / 1e9} B (Billion)')
     del lm_model.vision_encoder
     lm_model.save_pretrained(transformers_path, safe_serialization=False)
     tokenizer = AutoTokenizer.from_pretrained('../model/')
     tokenizer.save_pretrained(transformers_path)
-    print(f"模型已保存为 Transformers-MiniMind-V 格式: {transformers_path}")
+    print(f"模型已儲存為 Transformers-MiniMind-V 格式: {transformers_path}")
 
 
 def convert_transformers2torch(transformers_path, torch_path):
     model = AutoModelForCausalLM.from_pretrained(transformers_path, trust_remote_code=True)
     torch.save(model.state_dict(), torch_path)
-    print(f"模型已保存为 PyTorch 格式: {torch_path}")
+    print(f"模型已儲存為 PyTorch 格式: {torch_path}")
 
 
 if __name__ == '__main__':

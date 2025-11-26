@@ -661,7 +661,7 @@ Download link:
   <tbody>
     <tr>
       <td>
-        <img src="./dataset/eval_images/城市车水马龙-city-traffic.jpg" alt="city-traffic">
+        <img src="./dataset/eval_images/城市車水馬龍-city-traffic.jpg" alt="city-traffic">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
       <td>The image shows a busy city street with tall buildings on both sides of a long road. The street is packed with cars, trucks, and buses, along with many other vehicles driving on the road. There are many cars visible on the street, some driving at high speed, while others are parked at the side. Additionally, there is a bus parked on the right side of the street. Traffic lights are visible on the street, indicating a busy city environment.</td>
@@ -669,7 +669,7 @@ Download link:
     </tr>
     <tr>
       <td>
-        <img src="./dataset/eval_images/太空宇航员-Astronaut-Space.jpg" alt="astronaut">
+        <img src="./dataset/eval_images/太空宇航員-Astronaut-Space.jpg" alt="astronaut">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
       <td>The image shows an astronaut in a spacesuit sitting in a large spacecraft. They appear to be embarking on or disembarking from a space mission. Behind the astronaut, there is a rocket launch platform, likely to support the astronaut's mission during the journey. Additionally, an aircraft is parked near a hangar, further suggesting this is an aviation event. There are a few people around the aircraft, some standing close, possibly observing or waiting for the spacecraft to prepare for takeoff.</td>
@@ -677,7 +677,7 @@ Download link:
     </tr>
     <tr>
       <td>
-        <img src="./dataset/eval_images/小狗美女海边-Dog-Woman-Sea.jpg" alt="dog-woman-sea">
+        <img src="./dataset/eval_images/小狗美女海邊-Dog-Woman-Sea.jpg" alt="dog-woman-sea">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
       <td>The image shows a woman sitting on the beach, holding a white dog in her hands. She appears to be a woman sitting on the sand, looking at her. A dog is also sitting beside her, looking relaxed and comfortable. Other beachgoers are scattered across the beach, some sitting, while others are farther away. A boat can be seen in the background, indicating that this is a popular beach destination for tourists.</td>
@@ -693,7 +693,7 @@ Download link:
     </tr>
     <tr>
       <td>
-        <img src="./dataset/eval_images/椅子老人看书-Chair-Elderly-Reading.jpg" alt="elderly-reading">
+        <img src="./dataset/eval_images/椅子老人看書-Chair-Elderly-Reading.jpg" alt="elderly-reading">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
       <td>The image shows a man sitting on a park bench next to a green chair. There is an open book beside him with the words "reading" written on it, suggesting he may be reading. The park has a bench and a park seat, adding life to the surrounding environment. There are several cars and a truck nearby, indicating this is a public space. Additionally, a person can be seen standing at different locations in the park, possibly waiting to cross the road or walk further.</td>
@@ -701,7 +701,7 @@ Download link:
     </tr>
     <tr>
       <td>
-        <img src="./dataset/eval_images/熊猫草地-Panda-Grassland.jpg" alt="panda-grassland">
+        <img src="./dataset/eval_images/熊貓草地-Panda-Grassland.jpg" alt="panda-grassland">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
       <td>The image shows a white brown bear sitting on the grass, next to a large bear with brown spots. This bear seems shy or playful as it lies on the grass, resting and looking relaxed.</td>
@@ -709,7 +709,7 @@ Download link:
     </tr>
     <tr>
       <td>
-        <img src="./dataset/eval_images/自行车鲜花-Bicycle-Flowers.jpg" alt="bicycle-flowers">
+        <img src="./dataset/eval_images/腳踏車鮮花-Bicycle-Flowers.jpg" alt="bicycle-flowers">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
       <td>The image shows a beautiful vase filled with colorful flowers and bouquets. The bouquets are scattered throughout the vase, creating a visually pleasant scene. The colorful flowers in the vase create a delightful visual. These flowers are placed on a table, likely displayed to showcase their beauty.</td>

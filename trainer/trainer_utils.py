@@ -1,5 +1,5 @@
 """
-训练工具函数集合
+訓練工具函式集合
 """
 import os
 import random
@@ -58,19 +58,19 @@ def init_vlm_model(vlm_config, from_weight='pretrain_vlm', tokenizer_path='../mo
         weights = torch.load(weight_path, map_location=device)
         model.load_state_dict(weights, strict=False)
     
-    # Pretrain阶段：冻结除 vision_proj 外的所有参数
+    # Pretrain階段：凍結除 vision_proj 外的所有引數
     if freeze_llm:
         for name, param in model.named_parameters():
             if 'vision_proj' not in name:
                 param.requires_grad = False
     
-    # 默认全参训练时的可选配置（已注释）
-    # # 只解冻注意力机制中的投影层参数
+    # 預設全參訓練時的可選配置（已註釋）
+    # # 只解凍注意力機制中的投影層引數
     # for name, param in model.model.named_parameters():
     #     if any(proj in name for proj in ['q_proj', 'k_proj', 'v_proj', 'o_proj']):
     #         param.requires_grad = True
     
-    Logger(f'所加载VLM Model可训练参数：{sum(p.numel() for p in model.parameters() if p.requires_grad) / 1e6:.3f} 百万')
+    Logger(f'所載入VLM Model可訓練引數：{sum(p.numel() for p in model.parameters() if p.requires_grad) / 1e6:.3f} 百萬')
     preprocess = model.processor
     return model.to(device), tokenizer, preprocess
 
@@ -84,7 +84,7 @@ def vlm_checkpoint(vlm_config, weight='pretrain_vlm', model=None, optimizer=None
     if model is not None:
         from torch.nn.parallel import DistributedDataParallel
         state_dict = model.module.state_dict() if isinstance(model, DistributedDataParallel) else model.state_dict()
-        # 移除vision_encoder参数（不需要保存，因为是预训练的）
+        # 移除vision_encoder引數（不需要儲存，因為是預訓練的）
         clean_state_dict = {k: v for k, v in state_dict.items() if not k.startswith('vision_encoder.')}
         ckp_tmp = ckp_path + '.tmp'
         torch.save({k: v.half() for k, v in clean_state_dict.items()}, ckp_tmp)
@@ -119,14 +119,14 @@ def vlm_checkpoint(vlm_config, weight='pretrain_vlm', model=None, optimizer=None
         resume_tmp = resume_path + '.tmp'
         torch.save(resume_data, resume_tmp)
         os.replace(resume_tmp, resume_path)
-    else:  # 加载模式
+    else:  # 載入模式
         if os.path.exists(resume_path):
             ckp_data = torch.load(resume_path, map_location='cpu')
             saved_ws = ckp_data.get('world_size', 1)
             current_ws = dist.get_world_size() if dist.is_initialized() else 1
             if saved_ws != current_ws:
                 ckp_data['step'] = ckp_data['step'] * saved_ws // current_ws
-                Logger(f'GPU数量变化({saved_ws}→{current_ws})，step已自动转换为{ckp_data["step"]}')
+                Logger(f'GPU數量變化({saved_ws}→{current_ws})，step已自動轉換為{ckp_data["step"]}')
             return ckp_data
         return None
 

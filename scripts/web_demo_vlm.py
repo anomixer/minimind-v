@@ -30,7 +30,7 @@ def init_model(lm_config):
         model = AutoModelForCausalLM.from_pretrained(args.load_from, trust_remote_code=True)
         model.vision_encoder, model.processor = MiniMindVLM.get_vision_model("../model/vision_model/clip-vit-base-patch16")
 
-    print(f'VLM参数量：{sum(p.numel() for p in model.parameters() if p.requires_grad) / 1e6:.3f} 百万')
+    print(f'VLM引數量：{sum(p.numel() for p in model.parameters() if p.requires_grad) / 1e6:.3f} 百萬')
 
     vision_model, preprocess = model.vision_encoder, model.processor
     return model.eval().to(args.device), tokenizer, vision_model.to(args.device), preprocess
@@ -120,7 +120,7 @@ def launch_gradio_server(server_name="0.0.0.0", server_port=7788):
 
                 with gr.Blocks() as iface:
                     with gr.Row():
-                        image_input = gr.Image(type="filepath", label="选择图片", height=650)
+                        image_input = gr.Image(type="filepath", label="選擇圖片", height=650)
                     image_input.change(fn=get_current_image_path, inputs=image_input)
 
                 def update_parameters(temperature_, top_p_):
@@ -140,10 +140,10 @@ def launch_gradio_server(server_name="0.0.0.0", server_port=7788):
             with gr.Column(scale=6):
                 def chat_with_vlm(message, history):
                     if not message:
-                        yield history + [("错误", "错误：提问不能为空。")]
+                        yield history + [("錯誤", "錯誤：提問不能為空。")]
                         return
                     if not current_image_path:
-                        yield history + [("错误", "错误：图片不能为空。")]
+                        yield history + [("錯誤", "錯誤：圖片不能為空。")]
                         return
 
                     image_html = f'<img src="gradio_api/file={current_image_path}" alt="Image" style="width:100px;height:auto;">'
@@ -157,21 +157,21 @@ def launch_gradio_server(server_name="0.0.0.0", server_port=7788):
                 with gr.Row():
                     with gr.Column(scale=8):
                         message_input = gr.Textbox(
-                            placeholder="请输入你的问题...",
+                            placeholder="請輸入你的問題...",
                             show_label=False,
                             container=False
                         )
                     with gr.Column(scale=2, min_width=50):
-                        submit_button = gr.Button("发送")
+                        submit_button = gr.Button("傳送")
                 submit_button.click(
                     fn=chat_with_vlm,
                     inputs=[message_input, chatbot],
                     outputs=chatbot
                 )
 
-                # # 添加示例问题
+                # # 新增示例問題
                 # gr.Examples(
-                #     examples=["描述一下这个图片的内容。", "画面里面有什么？", "画面里的天气怎么样？"],
+                #     examples=["描述一下這個圖片的內容。", "畫面裡面有什麼？", "畫面裡的天氣怎麼樣？"],
                 #     inputs=message_input)
 
         demo.launch(server_name=server_name, server_port=server_port)
@@ -179,17 +179,17 @@ def launch_gradio_server(server_name="0.0.0.0", server_port=7788):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Chat with MiniMind")
-    parser.add_argument('--load_from', default='../model', type=str, help="模型加载路径（model=原生torch权重，其他路径=transformers格式）")
-    parser.add_argument('--save_dir', default='out', type=str, help="模型权重目录")
-    parser.add_argument('--weight', default='sft_vlm', type=str, help="权重名称前缀（pretrain_vlm, sft_vlm）")
-    parser.add_argument('--temperature', default=0.65, type=float, help="生成温度，控制随机性（0-1，越大越随机）")
-    parser.add_argument('--top_p', default=0.85, type=float, help="nucleus采样阈值（0-1）")
-    parser.add_argument('--device', default='cuda' if torch.cuda.is_available() else 'cpu', type=str, help="运行设备")
-    parser.add_argument('--hidden_size', default=512, type=int, help="隐藏层维度（512=Small-26M, 768=Base-104M）")
-    parser.add_argument('--num_hidden_layers', default=8, type=int, help="隐藏层数量（Small=8, Base=16）")
-    parser.add_argument('--max_seq_len', default=8192, type=int, help="最大序列长度")
-    parser.add_argument('--use_moe', default=0, type=int, choices=[0, 1], help="是否使用MoE架构（0=否，1=是）")
-    parser.add_argument('--stream', default=1, type=int, choices=[0, 1], help="是否使用流式输出（0=否，1=是）")
+    parser.add_argument('--load_from', default='../model', type=str, help="模型載入路徑（model=原生torch權重，其他路徑=transformers格式）")
+    parser.add_argument('--save_dir', default='out', type=str, help="模型權重目錄")
+    parser.add_argument('--weight', default='sft_vlm', type=str, help="權重名稱字首（pretrain_vlm, sft_vlm）")
+    parser.add_argument('--temperature', default=0.65, type=float, help="生成溫度，控制隨機性（0-1，越大越隨機）")
+    parser.add_argument('--top_p', default=0.85, type=float, help="nucleus取樣閾值（0-1）")
+    parser.add_argument('--device', default='cuda' if torch.cuda.is_available() else 'cpu', type=str, help="執行裝置")
+    parser.add_argument('--hidden_size', default=512, type=int, help="隱藏層維度（512=Small-26M, 768=Base-104M）")
+    parser.add_argument('--num_hidden_layers', default=8, type=int, help="隱藏層數量（Small=8, Base=16）")
+    parser.add_argument('--max_seq_len', default=8192, type=int, help="最大序列長度")
+    parser.add_argument('--use_moe', default=0, type=int, choices=[0, 1], help="是否使用MoE架構（0=否，1=是）")
+    parser.add_argument('--stream', default=1, type=int, choices=[0, 1], help="是否使用流式輸出（0=否，1=是）")
     args = parser.parse_args()
 
     lm_config = VLMConfig(hidden_size=args.hidden_size, num_hidden_layers=args.num_hidden_layers,

@@ -23,30 +23,30 @@ def init_model(args):
         model = AutoModelForCausalLM.from_pretrained(args.load_from, trust_remote_code=True)
         model.vision_encoder, model.processor = MiniMindVLM.get_vision_model("./model/vision_model/clip-vit-base-patch16")
     
-    print(f'VLM模型参数: {sum(p.numel() for p in model.parameters() if p.requires_grad) / 1e6:.2f} M(illion)')
+    print(f'VLM模型引數: {sum(p.numel() for p in model.parameters() if p.requires_grad) / 1e6:.2f} M(illion)')
     preprocess = model.processor
     return model.eval().to(args.device), tokenizer, preprocess
 
 
 def main():
     parser = argparse.ArgumentParser(description="MiniMind-V Chat")
-    parser.add_argument('--load_from', default='model', type=str, help="模型加载路径（model=原生torch权重，其他路径=transformers格式）")
-    parser.add_argument('--save_dir', default='out', type=str, help="模型权重目录")
-    parser.add_argument('--weight', default='sft_vlm', type=str, help="权重名称前缀（pretrain_vlm, sft_vlm）")
-    parser.add_argument('--hidden_size', default=512, type=int, help="隐藏层维度（512=Small-26M, 768=Base-104M）")
-    parser.add_argument('--num_hidden_layers', default=8, type=int, help="隐藏层数量（Small=8, Base=16）")
-    parser.add_argument('--use_moe', default=0, type=int, choices=[0, 1], help="是否使用MoE架构（0=否，1=是）")
-    parser.add_argument('--max_new_tokens', default=512, type=int, help="最大生成长度")
-    parser.add_argument('--temperature', default=0.65, type=float, help="生成温度，控制随机性（0-1，越大越随机）")
-    parser.add_argument('--top_p', default=0.85, type=float, help="nucleus采样阈值（0-1）")
-    parser.add_argument('--image_dir', default='./dataset/eval_images/', type=str, help="测试图像目录")
-    parser.add_argument('--device', default='cuda' if torch.cuda.is_available() else 'cpu', type=str, help="运行设备")
+    parser.add_argument('--load_from', default='model', type=str, help="模型載入路徑（model=原生torch權重，其他路徑=transformers格式）")
+    parser.add_argument('--save_dir', default='out', type=str, help="模型權重目錄")
+    parser.add_argument('--weight', default='sft_vlm', type=str, help="權重名稱字首（pretrain_vlm, sft_vlm）")
+    parser.add_argument('--hidden_size', default=512, type=int, help="隱藏層維度（512=Small-26M, 768=Base-104M）")
+    parser.add_argument('--num_hidden_layers', default=8, type=int, help="隱藏層數量（Small=8, Base=16）")
+    parser.add_argument('--use_moe', default=0, type=int, choices=[0, 1], help="是否使用MoE架構（0=否，1=是）")
+    parser.add_argument('--max_new_tokens', default=512, type=int, help="最大生成長度")
+    parser.add_argument('--temperature', default=0.65, type=float, help="生成溫度，控制隨機性（0-1，越大越隨機）")
+    parser.add_argument('--top_p', default=0.85, type=float, help="nucleus取樣閾值（0-1）")
+    parser.add_argument('--image_dir', default='./dataset/eval_images/', type=str, help="測試影像目錄")
+    parser.add_argument('--device', default='cuda' if torch.cuda.is_available() else 'cpu', type=str, help="執行裝置")
     args = parser.parse_args()
     
     model, tokenizer, preprocess = init_model(args)
     streamer = TextStreamer(tokenizer, skip_prompt=True, skip_special_tokens=True)
-    # 自动测试image_dir中的所有图像
-    prompt = "仔细看一下这张图：\n\n<image>\n\n描述一下这个图像的内容。"
+    # 自動測試image_dir中的所有影像
+    prompt = "仔細看一下這張圖：\n\n<image>\n\n描述一下這個影像的內容。"
     for image_file in sorted(os.listdir(args.image_dir)):
         if image_file.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp')):
             setup_seed(2026) # or setup_seed(random.randint(1, 10000))
@@ -58,7 +58,7 @@ def main():
             inputs_text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
             inputs = tokenizer(inputs_text, return_tensors="pt", truncation=True).to(args.device)
             
-            print(f'[图像]: {image_file}')
+            print(f'[影像]: {image_file}')
             print(f'👶: {prompt.replace('\n', '\\n')}')
             print('🤖️: ', end='')
             model.generate(
